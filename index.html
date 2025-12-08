@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/stamp0234_128x128.ico">
+  <link rel="icon" href="/img/stamp0234_128x128.ico">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -22,7 +22,7 @@
     <meta name="description" content="Record my learning process">
 <meta property="og:type" content="website">
 <meta property="og:title" content="huarun&#39;s Blog">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="https://blog.huarun.moe/index.html">
 <meta property="og:site_name" content="huarun&#39;s Blog">
 <meta property="og:description" content="Record my learning process">
 <meta property="og:locale" content="zh_CN">
@@ -63,7 +63,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"blog.huarun.moe","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -73,6 +73,17 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
   
@@ -89,7 +100,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>huarun&#39;s Blog</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -117,42 +128,6 @@
           
           
           
-          <!--暂时用不着
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          -->
-        
-          
-          
-          
-          <!--懒得分类
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          -->
-        
-          
-          
-          
-          <!--没几篇文章，打什么标签
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          -->
-        
-          
-          
-          
           
             <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
@@ -162,13 +137,18 @@
             </li>
           
         
-        <!--希望有一天我的blog也需要搜索
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-        -->
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
         
         
           <li class="nav-item" id="color-toggle-btn">
@@ -191,7 +171,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="An elegant Material-Design theme for Hexo"></span>
+            <span id="subtitle" data-typed-text="好好学习 天天向上"></span>
           
         </div>
 
@@ -229,15 +209,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/12/06/ADCTF2025%20writeup/" target="_self">
-          ADCTF2025 个人writeup
+        <a href="/2025/12/08/ADCTF2025-%E4%B8%AA%E4%BA%BAWriteup/" target="_self">
+          ADCTF2025-个人Writeup
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/12/06/ADCTF2025%20writeup/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/12/08/ADCTF2025-%E4%B8%AA%E4%BA%BAWriteup/" target="_self">
         <div>
-          ADCTF2025 Writeup解题人: huarun233参赛队伍: 喵喵喵喵喵喵喵喵喵喵喵喵喵   ![[&#x2F;img&#x2F;team.png]] AIRKK 问答我无法复现。当时交出flag的大致聊天过程可能包含：  Ctrl + U 查看网页源代码，可以在js代码中找到表情包关键词。然后投喂一些关键词，比如 枣，可爱，卖萌，喵喵喵，偷偷，亲，可爱，小萝莉，色色，摸摸，贴贴，脸红
+          ADCTF2025 Writeup 比赛结束这么久才把wp发出来，拖延症又犯了。x_x 更拖延的是，到现在都没把题目补完。总之先把自己做出的题目的post出来。 广东工业大学网络安全大赛暨ADCTF2025 - 个人题解 解题人: huarun233 参赛队伍: 喵喵喵喵喵喵喵喵喵喵喵喵喵  AI RKK 问答 我无法复现。当时交出flag的大致聊天过程可能包含：   Ctrl + U 查看网页源
         </div>
       </a>
 
@@ -245,8 +225,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-12-06 00:48" pubdate>
-              2025-12-06
+            <time datetime="2025-12-08 22:04" pubdate>
+              2025-12-08
             </time>
           </div>
         
@@ -305,28 +285,6 @@
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
 
     
 
@@ -390,8 +348,6 @@
 
 
 
-
-  <script  src="/js/local-search.js" ></script>
 
 
 
