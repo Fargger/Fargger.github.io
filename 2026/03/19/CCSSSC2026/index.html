@@ -1,0 +1,681 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="https://huarunblogimagehost.blob.core.windows.net/imagehost/stamp0234_128x128.ico">
+  <link rel="icon" href="https://huarunblogimagehost.blob.core.windows.net/imagehost/stamp0234_128x128.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#ddaacc">
+  <meta name="author" content="huarun">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="打了软件系统安全赛的初赛，成功爆零。现在跟着师兄师姐的思路复线一遍。 2 ThymeLeaf Thymeleaf SSTI漏洞分析-先知社区 密码生成逻辑 项目结构：  config controller model repository service   PseudoRandomGenerator - 伪随机数生成器  randomService UserService   PRNGCtfAp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCSSSC2026_赛后复现">
+<meta property="og:url" content="https://blog.huarun.moe/2026/03/19/CCSSSC2026/index.html">
+<meta property="og:site_name" content="huarun&#39;s Blog">
+<meta property="og:description" content="打了软件系统安全赛的初赛，成功爆零。现在跟着师兄师姐的思路复线一遍。 2 ThymeLeaf Thymeleaf SSTI漏洞分析-先知社区 密码生成逻辑 项目结构：  config controller model repository service   PseudoRandomGenerator - 伪随机数生成器  randomService UserService   PRNGCtfAp">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026layer2.png">
+<meta property="article:published_time" content="2026-03-19T07:20:51.000Z">
+<meta property="article:modified_time" content="2026-03-19T07:26:09.424Z">
+<meta property="article:author" content="huarun">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026layer2.png">
+  
+  
+  
+  <title>CCSSSC2026_赛后复现 - huarun&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.huarun.moe","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"https://huarunblogimagehost.blob.core.windows.net/imagehost/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>huarun&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026layer2.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.5)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="CCSSSC2026_赛后复现"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-19 15:20" pubdate>
+          2026年3月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          648 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          6 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">CCSSSC2026_赛后复现</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>打了软件系统安全赛的初赛，成功爆零。现在跟着师兄师姐的思路复线一遍。</p>
+<h2 id="2-ThymeLeaf">2 ThymeLeaf</h2>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/9962">Thymeleaf SSTI漏洞分析-先知社区</a></p>
+<h3 id="密码生成逻辑">密码生成逻辑</h3>
+<p>项目结构：</p>
+<ul>
+<li>config</li>
+<li>controller</li>
+<li>model</li>
+<li>repository</li>
+<li>service
+<ul>
+<li>
+<h2 id="PseudoRandomGenerator-伪随机数生成器">PseudoRandomGenerator - 伪随机数生成器</h2>
+</li>
+<li>randomService</li>
+<li>UserService</li>
+</ul>
+</li>
+<li>PRNGCtfApplication</li>
+</ul>
+<h2 id="3-Auth">3 Auth</h2>
+<h2 id="8-steganography">8 steganography</h2>
+<h3 id="赛后复现">赛后复现</h3>
+<p>使用 PowerShell 7 内置的 Format-Hex 工具，查看该文件的前 48 个字节：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Format-Hex</span> <span class="hljs-literal">-Path</span> ./ste* <span class="hljs-literal">-Count</span> <span class="hljs-number">48</span><br></code></pre></td></tr></table></figure>
+<p>发现 PNG 头 <code>89 50 4E 47 0D 0A 1A 0A</code>. 用 Python 尝试删除 PNG 头前面的内容：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">deletePreHex</span>(<span class="hljs-params">inputPath, outputPath</span>):<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(inputPath, <span class="hljs-string">&#x27;rb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        content = f.read()<br><br>    <span class="hljs-keyword">for</span> i, c <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(content):<br>        <span class="hljs-keyword">if</span> c == <span class="hljs-number">0x89</span>:<br>            pngHeaderIdx = i<br>            <span class="hljs-keyword">break</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Find PNG header at byte <span class="hljs-subst">&#123;i&#125;</span>.&quot;</span>)<br>    editedContent = content[pngHeaderIdx:]<br><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(outputPath, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        f.write(editedContent)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    deletePreHex(<span class="hljs-string">&#x27;./steganography_challenge&#x27;</span>, <span class="hljs-string">&#x27;./edited_png_.png&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>得到图像的一部分：</p>
+<img src="https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026edited_png_.png" srcset="https://huarunblogimagehost.blob.core.windows.net/imagehost/loading.gif" lazyload>
+<p>binwalk 扫一下，发现在文件偏移量为 41 的位置，有一个 <strong>Zlib 压缩数据块</strong>。<br>
+（在 win 和 wsl 之间切换真麻烦啊qaq）</p>
+<img src="https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026Pasted%20image%2020260315172826.png" srcset="https://huarunblogimagehost.blob.core.windows.net/imagehost/loading.gif" lazyload>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/571208394">各种文件类型及文件头标识大全（十六进制） - 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/zed-0xff/zsteg">zsteg</a> 扫一下文件：</p>
+<img src="https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026Pasted%20image%2020260315220127.png" srcset="https://huarunblogimagehost.blob.core.windows.net/imagehost/loading.gif" lazyload>
+<p>输出看不懂，引用一下 AI 对项目 Github 页面的总结：</p>
+<blockquote>
+<p>[!Gemini]</p>
+<h1>🧩 zsteg 输出结构快速理解</h1>
+<p>zsteg 会尝试从 PNG 的像素数据中，以不同方式提取隐藏信息，例如：</p>
+<ul>
+<li>
+<p><strong>b1 / b2 / b4</strong>：每像素使用 1、2、4 bit 的最低位（LSB）或最高位（MSB）</p>
+</li>
+<li>
+<p><strong>r / g / b / rgb / bgr</strong>：使用红、绿、蓝通道或组合</p>
+</li>
+<li>
+<p><strong>lsb / msb</strong>：最低有效位 / 最高有效位</p>
+</li>
+<li>
+<p><strong>xy</strong>：按像素顺序扫描</p>
+</li>
+<li>
+<p><strong>text / file</strong>：尝试解析为文本或文件头</p>
+</li>
+</ul>
+<p>你给出的输出中，每一行都是一种“提取方式 + 解析结果”。</p>
+</blockquote>
+<p>发现文件头疑似 <code>.7z</code> 的魔数，尝试修改成 <code>37 7a bc af 27 1c</code>，得到 <code>layer2.png</code>：<br>
+（居然是瞪眼法吗）</p>
+<img src="https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026layer2.png" srcset="https://huarunblogimagehost.blob.core.windows.net/imagehost/loading.gif" lazyload>
+<p>再 zsteg 扫一下，输出和前面一样。尝试提取 RGB 通道的 1-bit LSB 隐写数据：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">zsteg -e b1,rgb,lsb,xy ./layer2.png &gt; layer2.zip<br></code></pre></td></tr></table></figure>
+<p>尝试解压，显示非压缩包。和之前思路一样，再看看文件头：</p>
+<img src="https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026Pasted%20image%2020260315225821.png" srcset="https://huarunblogimagehost.blob.core.windows.net/imagehost/loading.gif" lazyload>
+<p>发现 <code>.zip</code> 的文件头 <code>50 4b 03 04</code>，但不在第 0-3 个字节。尝试用前面的脚本删除 <code>.zip</code> 头前的 byte，成功解压出七个文件：</p>
+<img src="https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026Pasted%20image%2020260315230320.png" srcset="https://huarunblogimagehost.blob.core.windows.net/imagehost/loading.gif" lazyload>
+<p>ZipCracker</p>
+<img src="https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026Pasted%20image%2020260315231221.png" srcset="https://huarunblogimagehost.blob.core.windows.net/imagehost/loading.gif" lazyload>
+<p><code>pass1</code> - <code>pass6</code> 的内容为：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">pass is <span class="hljs-keyword">c</span><span class="hljs-number">1</span><span class="hljs-title">!xxtLf</span><span class="hljs-variable">%fXYPkaA</span><br></code></pre></td></tr></table></figure>
+<p>根据密码解压 <code>flag.zip</code>，得到这玩意儿；观察其结构，只有 <code>e2 80 8b</code> 和 <code>e2 80 8c</code> 两种组合；询问 AI 得知是 <strong>零宽字符</strong>。<a target="_blank" rel="noopener" href="https://symbl.cc/cn/200B/"> 零宽间隔 (U+200B) 符号含义</a></p>
+<img src="https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026Pasted%20image%2020260315231818.png" srcset="https://huarunblogimagehost.blob.core.windows.net/imagehost/loading.gif" lazyload>
+<p>不妨设想其是 0 和 1 的映射，写脚本解码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;./flag.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>, encoding=<span class="hljs-string">&quot;utf-8&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    content = f.read()<br>    valid_content = content[<span class="hljs-number">12</span>:]<br><br>mapping = &#123;<span class="hljs-string">&quot;\u200b&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;\u200c&quot;</span>: <span class="hljs-number">1</span>&#125;<br>result = <span class="hljs-number">0</span><br><br><span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> valid_content:<br>    result = (result &lt;&lt; <span class="hljs-number">1</span>) + mapping[b]<br><br><span class="hljs-built_in">print</span>(result.to_bytes(result.bit_length() // <span class="hljs-number">8</span>)<br></code></pre></td></tr></table></figure>
+<p>但是 interpreter 报错：</p>
+<img src="https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026Pasted%20image%2020260317130736.png" srcset="https://huarunblogimagehost.blob.core.windows.net/imagehost/loading.gif" lazyload>
+<p>需要考虑 <strong>位溢出</strong>。介绍一个技巧，对 <code>bit_length()</code> +7 （官方文档中也有介绍<a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#int.to_bytes">Python 3.14.3 documentation</a>），即可输出正确的 Flag：</p>
+<img src="https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026Pasted%20image%2020260317131727.png" srcset="https://huarunblogimagehost.blob.core.windows.net/imagehost/loading.gif" lazyload>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/CTF/" class="category-chain-item">CTF</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>CCSSSC2026_赛后复现</div>
+      <div>https://blog.huarun.moe/2026/03/19/CCSSSC2026/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>huarun</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年3月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              <a class="print-no-link" target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/">
+                <span class="hint--top hint--rounded" aria-label="CC0 - 无版权">
+                  <i class="iconfont icon-cc-zero"></i>
+                </span>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/03/07/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E4%B8%8E%E5%9B%BE%E5%83%8F%E5%8D%B7%E7%A7%AF/" title="线性回归与图像卷积">
+                        <span class="hidden-mobile">线性回归与图像卷积</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
