@@ -26,12 +26,12 @@
 <meta property="og:site_name" content="huarun&#39;s Blog">
 <meta property="og:description" content="打了软件系统安全赛的初赛，成功爆零。现在跟着师兄师姐的思路复线一遍。 2 ThymeLeaf Thymeleaf SSTI漏洞分析-先知社区 密码生成逻辑 项目结构：  config controller model repository service   PseudoRandomGenerator - 伪随机数生成器  randomService UserService   PRNGCtfAp">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026layer2.png">
+<meta property="og:image" content="https://huarunblogimagehost.blob.core.windows.net/imagehost/pjsk_card_compressed/ena_normal.png">
 <meta property="article:published_time" content="2026-03-19T07:20:51.000Z">
-<meta property="article:modified_time" content="2026-03-19T07:26:09.424Z">
+<meta property="article:modified_time" content="2026-03-28T10:28:13.474Z">
 <meta property="article:author" content="huarun">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026layer2.png">
+<meta name="twitter:image" content="https://huarunblogimagehost.blob.core.windows.net/imagehost/pjsk_card_compressed/ena_normal.png">
   
   
   
@@ -73,7 +73,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.huarun.moe","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"https://huarunblogimagehost.blob.core.windows.net/imagehost/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"blog.huarun.moe","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":3},"lazyload":{"enable":true,"loading_img":"https://huarunblogimagehost.blob.core.windows.net/imagehost/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -187,7 +187,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://huarunblogimagehost.blob.core.windows.net/imagehost/posts/006CCSSSC2026layer2.png') no-repeat center center; background-size: cover;">
+     style="background: url('https://huarunblogimagehost.blob.core.windows.net/imagehost/pjsk_card_compressed/ena_normal.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.5)">
       <div class="banner-text text-center fade-in-up">
