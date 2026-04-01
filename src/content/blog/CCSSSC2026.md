@@ -2,6 +2,7 @@
 title: CCSSSC2026 赛后复现
 description: Misc & Web
 pubDate: 2026-03-19 15:20:51
+draft: false
 ---
 
 打了软件系统安全赛的初赛，成功爆零。现在跟着师兄师姐的思路复线一遍。

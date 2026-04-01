@@ -2,6 +2,7 @@
 title: huarun's 2025年度总结
 description: 18岁捏
 pubDate: 2026-01-07 22:19:40
+draft: false
 ---
 
 今晚实在没事情干了，写个年度总结玩玩吧。
