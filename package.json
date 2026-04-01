@@ -1,0 +1,19 @@
+{
+  "name": "astro",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "astro check",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.18.1",
+    "komorebi-theme": "^0.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.8",
+    "typescript": "^5.9.3"
+  }
+}
