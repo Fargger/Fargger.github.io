@@ -27,10 +27,22 @@ const friends = [
     description: '⑨歌',
   },
   {
-    name: '',
-    url: '',
-    avatar: '',
+    name: '時雨てる',
+    url: 'https://keqing.moe/',
+    avatar: 'https://avatars.githubusercontent.com/u/59642397?v=4',
     description: '',
+  },
+  {
+    name: 'Phrinky',
+    url: 'https://blog.rkk.moe/',
+    avatar: 'https://avatars.githubusercontent.com/u/24487646?v=4',
+    description: '可燃性物質です。',
+  },
+  {
+    name: 'GamerNoTitle',
+    url: 'https://bili33.top/',
+    avatar: 'https://assets.bili33.top/img/AboutMe/logo-mini.png',
+    description: 'TECH OTAKUS SAVE THE WORLD',
   },
 ];
 
