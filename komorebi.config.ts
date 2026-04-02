@@ -1,5 +1,21 @@
 import komorebi from 'komorebi-theme';
 
+const now = new Date();
+const hour = now.getHours();
+const weekdayNames = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+const timeGreeting =
+  hour >= 5 && hour < 11
+    ? '新しい一日が始まりました。'
+    : hour >= 11 && hour < 14
+      ? 'こんにちは！お昼のひととき、ここでほっと一息つきませんか？'
+      : hour >= 14 && hour < 19
+        ? 'こんにちは、午後の時間です。'
+        : hour >= 19 && hour < 24
+          ? 'こんばんは。'
+          : '夜更けにようこそ。';
+// 使用模板字符串显示日期
+const todayWithWeekday = `今天是${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日 ${weekdayNames[now.getDay()]}`;
+
 const friends = [
   {
     name: 'huarun',
@@ -48,12 +64,12 @@ const friends = [
 
 export default komorebi({
   title: "huarun's Blog",
-  tagline: "QwQ",
+  tagline: "华闰的博客",
   locale: "zh-CN",
   pagination: { pageSize: 10 },
   home: {
-    eyebrow: "欢迎来到这里",
-    title: "Hi~",
+    eyebrow: todayWithWeekday,
+    title: timeGreeting,
     description: "欢迎来到我的博客。",
   },
   friends: friends,
