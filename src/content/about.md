@@ -13,7 +13,8 @@ You can get my avatar [here](https://huarunblogimagehost.blob.core.windows.net/i
 ### I'm Recently Learning...
 
 - Web Sercurity.
+- Graphics Identification (like OCR)
 
 ### I'm Recently Building...
 
-I wish if i could build something. qaq
+- an OCR pharser for maimai DX
