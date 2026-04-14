@@ -63,4 +63,5 @@ export default komorebi({
   },
   friends: friends,
   labels: {},
+  customCss: ['katex/dist/katex.min.css']
 });
