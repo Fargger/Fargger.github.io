@@ -8,6 +8,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
+    smartypants: false,
   },
   integrations: [komorebiConfig],
 });

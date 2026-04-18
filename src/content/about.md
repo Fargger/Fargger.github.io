@@ -4,7 +4,7 @@ description: "huarun's Blog 的关于页面。"
 pubDate: 2026-03-31
 ---
 
-### About Me 
+### About Me'me 
 
 Hi there, I'm totally a freshman in CS, also an undergraduate student from Guangdong University of Technology.
 
@@ -13,8 +13,7 @@ You can get my avatar [here](https://huarunblogimagehost.blob.core.windows.net/i
 ### I'm Recently Learning...
 
 - Web Sercurity.
-- Graphics Identification (like OCR)
 
-### I'm Recently Building...
+### I’m Recently Building...
 
-- an OCR pharser for maimai DX
+- I wish if i could buildl something. qaq
