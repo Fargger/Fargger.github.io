@@ -1,9 +1,15 @@
 import komorebi from 'komorebi-theme';
 
 const now = new Date();
+const timeUtc8 = new Intl.DateTimeFormat('zh-CN', {
+  timeZone: 'Asia/Shanghai',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(new Date()).replace(/\s/g, '');
 const weekdayNames = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
 // 使用模板字符串显示日期
-const todayWithWeekday = `今天是${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日 ${weekdayNames[now.getDay()]}`;
+const todayWithWeekday = `今天是${timeUtc8} ${weekdayNames[now.getDay()]}`;
 
 const friends = [
   {
