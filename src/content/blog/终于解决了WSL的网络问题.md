@@ -5,6 +5,8 @@ pubDate: 2026-02-28 23:17:50
 draft: false
 ---
 
+2026/04/24 更新：
+WSL 网络环境真的槽点太多了。我决定以后把遇到的每一个问题都记录在这。  
 
 > [!TIP]
 > 本文作为笔记，大部分解决办法来自他人的 Blog 或 AI 生成。
@@ -15,6 +17,7 @@ draft: false
 - Windows 版的 Clash Verge 配置代理
 
 # 用户环境变量不同导致代理未正确配置
+
 ## 问题描述
 
 在开启 Mirrored 模式的 WSL 中，执行 `apt update` 成功，但是 `sudo apt update` 却出现了 DNS 解析问题。
@@ -54,6 +57,7 @@ http_proxy=http://127.0.0.1:7897
 ```
 
 所以原因在于：没有为 `root`用户设置代理。使用 `-E` 选项让 `sudo` 继承当前用户的环境变量即可。
+
 
 # 校园网下，MTU 较小导致 SSL 连接错误，无法拉取 Github Repo
 
@@ -126,3 +130,8 @@ sudo ip link set dev eth0 mtu 1400
 2. **可用空间减小：** 如果物理链路是 1500，套上一层 40 字节的皮，剩下的有效载荷就只有 **1460** 了。
     
 3. **WSL 的误判：** 你的 WSL 显示 `eth0` 是 9000，这通常是因为 **WSL2 的虚拟交换机 (Hyper-V Virtual Switch)** 为了性能默认开启了巨型帧支持。但在复杂的校园网环境下，这种“自以为是”的高性能设置直接导致了数据包撞墙。
+
+
+# 使用 Windows 版 VSCode 远程连接 WSL 目录时，REST Client 无法向 localhost 发送请求
+
+Web 开发要用到 REST Client 做 CRUD.
