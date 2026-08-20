@@ -9,20 +9,26 @@
     "appleTouchIcon": "/apple-touch-icon.png"
   },
   "author": {
-    "name": "huarun",
+    "name": "华闰",
     "twitterId": "",
     "avatar": "https://huarunblogimagehost.blob.core.windows.net/imagehost/huarun.png"
   },
   "hero": {
-    "name": "huarun's Blog",
-    "bio": "分享 CS 技术相关",
-    "description": "这里是 huarun 的 Blog，分享 CS 技术相关。",
+    "name": "华闰闰闰",
+    "bio": "分享 CS 技术学习",
+    "description": "CTF | Web安全 | Web 开发",
     "socials": [
       {
         "name": "Github",
         "icon": "icon-github",
         "url": "https://github.com/Fargger",
         "color": "rgb(24, 23, 23)"
+      },
+      {
+        "name": "Telegram",
+        "icon": "icon-telegram",
+        "url": "https://t.me/huarun233",
+        "color": "rgb(0, 136, 204)"
       },
       {
         "name": "RSS",

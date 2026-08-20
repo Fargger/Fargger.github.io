@@ -1,11 +1,11 @@
 ---
-title: "2601做题笔'记"
+title: "2601做题笔记"
 date: 2026-02-02T20:35:28
 summary: CTF Web 方向题目
 category: CTF
 tags: [Web, CTF, 题解]
 ---
-## 2601做题笔'记
+## 2601做题笔记
 
 一月份找了点web题做。其中大部分都来自 NSSCTF 的每日一题。
 
