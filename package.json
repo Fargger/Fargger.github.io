@@ -4,15 +4,22 @@
   "type": "module",
   "version": "0.0.1",
   "packageManager": "pnpm@11.3.0",
+  "engines": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "pnpm": "11.3.0"
+  },
   "scripts": {
+    "check-env": "node scripts/check-env.js",
+    "preinstall": "node scripts/check-env.js",
     "prepare": "pnpm exec simple-git-hooks",
-    "dev": "astro dev",
-    "build": "astro check && astro build && pagefind --site dist",
-    "preview": "astro preview",
-    "astro": "astro",
-    "lint": "prettier --write .",
-    "new-friend": "node scripts/new-friend.js",
-    "new-post": "node scripts/new-post.js"
+    "dev": "pnpm check-env && astro dev",
+    "build": "pnpm check-env && astro check && astro build && pagefind --site dist",
+    "preview": "pnpm check-env && astro preview",
+    "astro": "pnpm check-env && astro",
+    "lint": "pnpm check-env && prettier --write .",
+    "new-friend": "pnpm check-env && node scripts/new-friend.js",
+    "new-post": "pnpm check-env && node scripts/new-post.js"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",

@@ -6,12 +6,17 @@
 
 ## 环境准备
 
-- Node.js >= 18.18
-- pnpm（推荐，见 `package.json` 的 `packageManager` 字段）
+- Node.js 24.19.0（随附 npm 11.17.0）
+- pnpm 11.3.0
 
 ```bash
+nvm install      # 根据 .nvmrc 安装指定版本
+nvm use          # 切换到与 GitHub Actions 相同的 Node.js / npm
+npm install -g pnpm@11.3.0
 pnpm install   # 首次安装依赖
 ```
+
+`package.json` 会在安装和启动开发、构建命令前校验 Node.js 与 pnpm 版本；GitHub Actions 同样读取 `.nvmrc`，pnpm 版本则读取 `packageManager` 字段，避免本机与部署环境不一致。
 
 ## 常用命令
 
@@ -37,38 +42,38 @@ pnpm new-post   # 按提示输入文件名和标题
 
 ```yaml
 ---
-title: 文章标题            # 必填
-date: 2026-03-01T12:00:00  # 必填，建议 ISO 8601 格式
-lastMod: 2026-03-05        # 可选，更新时间
-summary: 一句话摘要         # 可选，显示在列表卡片 + SEO
-cover: https://...         # 可选，列表卡片缩略图
-category: 学习笔记          # 可选，分类（用于 /categories）
-tags: [Astro, 建站]        # 可选，标签（用于 /tags）
-comments: true             # 可选，默认 true（当前评论已全局关闭）
-draft: false               # 可选，true 时不参与生产构建
-sticky: 0                  # 可选，>0 置顶，数字越大越靠前
+title: 文章标题 # 必填
+date: 2026-03-01T12:00:00 # 必填，建议 ISO 8601 格式
+lastMod: 2026-03-05 # 可选，更新时间
+summary: 一句话摘要 # 可选，显示在列表卡片 + SEO
+cover: https://... # 可选，列表卡片缩略图
+category: 学习笔记 # 可选，分类（用于 /categories）
+tags: [Astro, 建站] # 可选，标签（用于 /tags）
+comments: true # 可选，默认 true（当前评论已全局关闭）
+draft: false # 可选，true 时不参与生产构建
+sticky: 0 # 可选，>0 置顶，数字越大越靠前
 ---
 ```
 
 > 建议：`date` 使用 ISO 8601 格式（`YYYY-MM-DD` 或 `YYYY-MM-DDTHH:MM:SS`）。Astro 对日期解析比较宽松（带空格的 `YYYY-MM-DD HH:MM:SS` 也能被解析为本地时间），但 ISO 格式更清晰、无时区歧义。
 
-Markdown 支持：KaTeX 公式（`$...$` / `$$...$$` / ```` ```math ````）、表格、代码高亮、脚注、图片（原生 `<img>` 也会自动懒加载）、`||隐藏内容||`、视频嵌入（`:bilibili[id]` 等）。
+Markdown 支持：KaTeX 公式（行内 `$...$`、块级 `$$...$$` 及 math 代码块）、表格、代码高亮、脚注、图片（原生 `<img>` 也会自动懒加载）、`||隐藏内容||`、视频嵌入（`:bilibili[id]` 等）。
 
 ## 修改站点设置
 
 绝大部分配置在 **`src/config.json`**（不是 astro.config）：
 
-| 配置项 | 作用 |
-| --- | --- |
-| `site` | 域名、站点标题、描述、关键词、favicon |
-| `author` | 作者名、头像 |
-| `hero` | 首页大标题、简介、社交链接、一言 |
-| `color` | 强调色 / 背景 / 文字 / 边框（light + dark 各一组） |
-| `menus` | 顶部导航栏 |
-| `posts.perPage` | 每页文章数 |
-| `footer.startTime` | 底部运行天数起算时间 |
-| `waline.serverURL` | 评论服务地址（留空 = 关闭评论） |
-| `analytics` | 统计（Google / Umami / Clarity） |
+| 配置项             | 作用                                               |
+| ------------------ | -------------------------------------------------- |
+| `site`             | 域名、站点标题、描述、关键词、favicon              |
+| `author`           | 作者名、头像                                       |
+| `hero`             | 首页大标题、简介、社交链接、一言                   |
+| `color`            | 强调色 / 背景 / 文字 / 边框（light + dark 各一组） |
+| `menus`            | 顶部导航栏                                         |
+| `posts.perPage`    | 每页文章数                                         |
+| `footer.startTime` | 底部运行天数起算时间                               |
+| `waline.serverURL` | 评论服务地址（留空 = 关闭评论）                    |
+| `analytics`        | 统计（Google / Umami / Clarity）                   |
 
 ## 友链
 

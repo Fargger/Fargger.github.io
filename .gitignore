@@ -26,6 +26,5 @@ pnpm-debug.log*
 # local pnpm store / temp (sandbox)
 .pnpm-store/
 .pnpm-home/
-.npmrc
 .gyoza-src/
 .user-content-backup/
